@@ -1,0 +1,326 @@
+Student Course Registration System
+
+Develop a college course registration application.
+
+SAP ABAP – Technical Area
+Data Dictionary Tables:
+ 1. zstudentt
+ 2. zstudent_address
+ 3. zregistration
+ 4. zcourse
+ 5. zfeedetails
+
+
+                       Data Element                                Domain
+#ZSTUDENTT
+
+STUDENT_ID             ZDE_STUDENT_ID                              ZDE_STUDENT_ID
+NAME                   ZDE_STUDENT_NAME                            ZDE_STUDENT_NAME
+DEPARTMENT             ZDE_DEPARTMENT                              ZDE_DEPARTMENT
+YEAR                   ZDE_YEAR                                    ZDE_YEAR
+CREATED_DATE           ZER_DATE                                    SYDATS
+CREATED_TIME           ZER_TIME                                    SYTIME
+CREATED_BY             ZER_NAM                                     SYCHAR12
+
+#ZSTUDENT_ADDRESS
+
+STUDENT_ID             ZDE_STUDENT_ID                              ZDE_STUDENT_ID
+PAREMNT_NAME           ZDE_PARENT_NAME                             ZDE_PARENT_NAME
+ADDRESS                ZDE_ADDRESS                                 ZDE_ADDRESS
+PARENT_MOBILE_NO       ZDE_PHONE                                   ZDE_PHONE
+PARENT_EMAIL ID        ZDE_EMAIL                                   ZDE_EMAIL
+CREATED_DATE           ZER_DATE                                    SYDATS
+CREATED_TIME           ZER_TIME                                    SYTIME
+CREATED_BY             ZER_NAM                                     SYCHAR12
+
+#ZCOURSE
+
+COURSE_ID              ZDE_COURSE_ID                               ZDE_COURSE_ID
+COURSE_NAME            ZDE_COURSE_NAME                             ZDE_COURSE_NAME
+FACULTY                ZDE_FACULTY                                 ZDE_FACULTY
+MAX_STRENGTH           ZDE_MAX_STRENGTH                            ZDE_MAX_STRENGTH
+CREATED_DATE           ZER_DATE                                    SYDATS
+CREATED_TIME           ZER_TIME                                    SYTIME
+CREATED_BY             ZER_NAM                                     SYCHAR12
+
+#ZREGISTRATION
+
+REG_ID                 ZDE_REG_ID                                  ZDE_REG_ID
+STUDENT_ID             ZDE_STUDENT_ID                              ZDE_STUDENT_ID
+COURSE_ID              ZDE_COURSE_ID                               ZDE_COURSE_ID
+REG_DATE               ZDE_REG_DATE                                ZDE_REG_DATE
+CREATED_DATE           ZER_DATE                                    SYDATS
+CREATED_TIME           ZER_TIME                                    SYTIME
+CREATED_BY             ZER_NAM                                     SYCHAR12
+
+
+#ZFEEDETAILS
+
+REG_ID                 ZDE_REG_ID                                  ZDE_REG_ID
+TERM_NO                ZDE_TERM_NO                                 ZDE_TERM_NO
+ITEM_NO                ZDE_ITEM_NO                                 ZDE_ITEM_NO
+FEE_AMOUNT             ZDE_AMOUNT                                  ZDE_AMOUNT
+CREATED_DATE           ZER_DATE                                    SYDATS
+CREATED_TIME           ZER_TIME                                    SYTIME
+CREATED_BY             ZER_NAM                                     SYCHAR12
+
+
+
+
+
+
+Search Help
+
+ZSH_STUDENTT                   Student search help
+
+ZSH_COURSE                     Course search help
+
+ZSH_REG                        Registration search help
+
+
+
+Foreign Key Relationships
+
+Primary Table                    Foreign Key Table                    Relationship
+
+ZSTUDENTT                        ZSTUDENT_ADDRESS                     STUDENT_ID
+
+ZSTUDENTT                        ZREGISTRATION                        STUDENT_ID
+
+ZCOURSE                          ZREGISTRATION                        COURSE_ID
+                         
+ZREGISTRATION                    ZFEEDETAILS                          REG_ID
+
+
+
+Report 1                 ZR_STUDENT_REG_REPORT
+
+ TABLES:
+
+1. zstudentt
+2. zstudent_address
+3. zregistration
+4. zcourse
+5. zfeedetails
+
+
+## Select-Options
+
+1. s_stid
+2. s_reg
+3. s_dept
+4. s_cour
+5. s_date
+
+
+# Type Declaration
+
+## Structure Type
+
+### ty_final
+
+Fields inside ty_final:
+
+1. student_id
+2. reg_id
+3. student_name
+4. course_name
+5. address
+6. parent_name
+7. parent_mobile_no
+8. parent_email_id
+9. course_id
+10. term_no
+11. item_no
+12. fee_amount
+13. created_date
+
+
+# Internal Tables
+
+These are all the internal tables (TYPE TABLE OF):
+
+1. lt_student
+2. lt_address
+3. lt_registration
+4. lt_course
+5. lt_fee
+6. lt_final
+7. lt_fieldcat
+
+
+
+# Work Areas / Structures
+
+These are all work areas or structure variables:
+
+1. ls_student
+2. ls_address
+3. ls_registration
+4. ls_course
+5. ls_fee
+6. ls_final
+7. ls_fieldcat
+
+
+# Simple Variables
+
+These are normal variables:
+
+1. lv_repid
+
+
+# ALV Objects
+
+## ALV Field Catalog Objects
+
+1. lt_fieldcat → Internal table for field catalog
+2. ls_fieldcat → Work area for field catalog
+
+
+# Event Block
+
+1. START-OF-SELECTION
+
+
+# Function Module Used
+
+1. REUSE_ALV_GRID_DISPLAY
+
+
+# System Fields Used
+
+1. sy-subrc
+2. sy-repid
+
+
+
+
+
+Report 2                     ZR_COURSE_INFO
+
+TABLES:
+
+1. zcourse
+2. zregistration
+
+
+# Type Pools
+
+1. slis
+
+
+# Selection Screen Objects
+
+## Select-Options
+
+1. s_cour
+2. s_date
+
+
+# Type Declaration
+
+## Structure Type
+
+### ty_course
+
+Fields inside ty_course:
+
+1. course_id
+2. course_name
+3. faculty
+4. max_strength
+5. created_date
+6. no_seats_filled
+7. no_avail_seats
+
+
+# Internal Tables
+
+These are all the internal tables (TYPE TABLE OF):
+
+1. lt_course
+2. lt_zcourse
+3. lt_fieldcat
+
+
+# Work Areas / Structures
+
+These are all work areas or structure variables:
+
+1. ls_course
+2. ls_zcourse
+3. ls_fieldcat
+
+
+# Variables
+
+These are normal variables:
+
+1. lv_count
+2. lv_repid
+
+
+# ALV Objects
+
+## ALV Field Catalog Objects
+
+1. lt_fieldcat → Internal table for field catalog
+2. ls_fieldcat → Work area for field catalog
+
+
+# Event Block
+
+1. START-OF-SELECTION
+
+
+# Function Module Used
+
+1. REUSE_ALV_GRID_DISPLAY
+
+
+# System Fields Used
+
+1. sy-subrc
+2. sy-repid
+
+# SQL Operations Used
+
+1. SELECT *
+2. SELECT COUNT(*)
+
+
+# Looping Statements Used
+
+1. LOOP AT lt_zcourse INTO ls_zcourse
+
+
+# Conditional Statements Used
+
+1. IF lt_zcourse IS INITIAL
+2. IF lt_course IS INITIAL
+3. IF sy-subrc <> 0
+
+
+
+
+
+Module Pool Program      ZMODCOURSE_REG
+Transaction Code         ZCOURSE_REG
+
+
+
+0100                    Main Menu
+0200                    Student Registration    (BTN1)
+0300                    Course Maintenance      (BTN2)
+0400                    Fees Management         (BTN3)
+
+
+
+
+
+
+
+
+
+
