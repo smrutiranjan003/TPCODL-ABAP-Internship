@@ -49,5 +49,5 @@ Course Registration Confirmation
 **Program Name :**
 `ZR_COURSE_REG_SMART`
 
-Purpose :
+**Purpose :**
 Fetch data and call SmartForm for printing Course Registration Confirmation
